@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios</title>
+    <title>Panel de Agencia</title>
     <style>
         body {
             font-family: Arial;
@@ -38,7 +38,7 @@
         a.boton {
             display: block;
             width: 200px;
-            margin: 20px auto;
+            margin: 10px auto;
             text-align: center;
             background-color: #007bff;
             color: white;
@@ -55,25 +55,20 @@
 <body>
 
 <?php
-require_once("conexion.php"); // Asegúrate de que el archivo de tu clase esté en esta ruta
+require_once("conexion.php");
 
 try {
-    // Crear conexión
     $conn = CConexion::ConexionBD();
+    echo "<p style='text-align:center; color:green;'>✔ CHIREY AGENCIA</p>";
 
-    // Consulta SQL
     $query = 'SELECT * FROM public.usuarios';
-
-    // Ejecutar consulta
     $stmt = $conn->prepare($query);
     $stmt->execute();
 
-    // Mostrar resultados en una tabla HTML
     echo "<h2>Lista de Usuarios</h2>";
     echo "<table>";
     echo "<tr><th>ID</th><th>Nombre</th><th>Correo</th></tr>";
 
-    // Recorrer resultados
     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($fila['id_usuarios']) . "</td>";
@@ -89,7 +84,15 @@ try {
 }
 ?>
 
+<!-- Botones de navegación -->
+<h2>Panel de gestión</h2>
 <a class="boton" href="insertarUsuario.php">➕ Añadir Usuario</a>
+<a class="boton" href="clientes.php">👥 Ver Clientes</a>
+<a class="boton" href="autos.php">🚗 Ver Autos</a>
+<a class="boton" href="ventas.php">🛒 Ver Ventas</a>
+<a class="boton" href="pagos.php">💳 Ver Pagos</a>
+<a class="boton" href="garantias.php">🛡️ Ver Garantías</a>
+<a class="boton" href="promociones.php">🎁 Ver Promociones</a>
 
 </body>
 </html>
